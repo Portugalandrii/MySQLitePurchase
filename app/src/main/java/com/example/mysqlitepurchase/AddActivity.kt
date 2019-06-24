@@ -22,6 +22,10 @@ class AddActivity : AppCompatActivity() {
         //lateinit var product: Pruducts
         val bundle: Bundle? = intent.extras  //проверяем Bundle, который получили с MainActitity c помощью Parceble
         val id =  (bundle?.apply {                      // достаем наш bundle
+
+//       var a = getInt("key")
+//            println(a)
+
         var products:Pruducts? = getParcelable<Pruducts>("id")    // получаем наш объект с MainActivity
 
             product = Pruducts(products!!.id,products.name,products.quant,products.pr)

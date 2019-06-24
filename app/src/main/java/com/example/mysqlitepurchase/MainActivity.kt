@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,9 +26,14 @@ class MainActivity : AppCompatActivity() {
         base.layoutManager = LinearLayoutManager(applicationContext)
         base.adapter = ProductsAdapter(dbHandler!!.getProducts(),this)
 
+        var sumString =dbHandler.sumAll().toString()
+
+        val textView = findViewById<TextView>(R.id.all_sum)
+        textView.text = "СУММА = $sumString грн"
 
         fab.setOnClickListener { view ->
             val i = Intent(applicationContext, AddActivity::class.java)
+           // i.putExtra("key",1)
             startActivity(i)
         }
 
@@ -37,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

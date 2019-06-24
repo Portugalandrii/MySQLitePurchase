@@ -14,8 +14,19 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DB_NAME, null
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
 
     }
+    fun sumAll(): Int? {
+        val db = this.readableDatabase
+        var sum = db.rawQuery("select sum (quantity*price) from $TABLE_NAME", null)
+        var a:Int? = 0
+        if (sum != null) {
+            if (sum.moveToFirst()) {
+               a = sum.getInt(0)
+            }
+        }
+        return a
+    }
 
-    fun addProducts(prod: Pruducts): Boolean {
+        fun addProducts(prod: Pruducts): Boolean {
         //Create and/or open a database that will be used for reading and writing.
         val db = this.writableDatabase  //Получили доступ к базе данных
         val values = ContentValues()    //Коллекция для хранения данных
